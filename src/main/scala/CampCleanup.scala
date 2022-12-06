@@ -13,7 +13,7 @@ object CampCleanup {
     pairOfElves.map{
       elfPair =>
         val rangePairs: Array[String] = elfPair.split(",")
-        if(compareRanges(rangePairs)) {
+        if(findPartialOverlap(rangePairs)) {
           1
         } else {
           0
@@ -32,6 +32,12 @@ object CampCleanup {
     } else {
       commonSections == lengthOne
     }
+  }
+
+  def findPartialOverlap(elfPair: Array[String]): Boolean = {
+    val rangeElfOne = getRange(elfPair(0))
+    val rangeElfTwo = getRange(elfPair(1))
+    (rangeElfOne intersect rangeElfTwo).nonEmpty
   }
 
   def getRange(elf: String): List[Int] = {
